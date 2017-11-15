@@ -19,10 +19,9 @@ database = firebase.database();
     //
     $("#addScore").on("click", function(event) {
 
-      // When user adds a train, store the train info in the database 
       event.preventDefault(); // Don't reset the page!
 
-      // Get the train info from the form
+      // Get the username from form, and number of answers correct from game.
       var username        = $("#username").val().trim();
       var numberCorrect = $("#number-correct").val().trim();
 
@@ -49,7 +48,6 @@ database = firebase.database();
                     }
           );
         });
-
         scores.forEach(outputOneRow);
     });
 
