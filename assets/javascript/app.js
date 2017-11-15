@@ -193,22 +193,30 @@ $(document).ready(function(){
             $(answerID).text(triviaQuestions[currentQuestionNum].answers[i]);
         }
         currentRightAnswer = triviaQuestions[currentQuestionNum].correctAnswerNum;
-        // console.log("current right answer is ",currentRightAnswer);
-         x = triviaQuestions[currentQuestionNum].answers[currentRightAnswer];
-        console.log("this is x"+x);
+        // console.log("current right answer is ",currentRightAnswer         
+        x = triviaQuestions[currentQuestionNum].answers[currentRightAnswer];
+        console.log("this is x "+x);
+
         //console.log("text");
             var API_KEY = '7024641-dc104f7b2c2ba9ca9bdcc091e';
             var URL = "https://pixabay.com/api/?key="+API_KEY+"&q="+encodeURIComponent(x)+"&image_type=photo"+"&safesearch=true";
         $.getJSON(URL, function(data){
-          //  console.log("this is the data", data);
-            $(".bg").css('background-image', 'url('+data.hits[0].webformatURL+')');
-        if (parseInt(data.totalHits) > 0)
+          //  console.log(data.hits.length);
+
+          // console.log("this is the data", data);
+            if (data.hits.length == 0 ){
+                console.log("testing local asset");
+                $(".bg").css('background-image: url("../images/cornwallis_surrender.jpg"');
+             } else {
+                $(".bg").css('background-image', 'url('+data.hits[0].webformatURL+')');
+             }
+                    
+            //(parseInt(data.totalHits) > 0)
          //   $.each(data.hits, function(i, hit){ console.log(hit.pageURL); });
 
         //else
             //console.log('No hits');
-            
-            $(".bg").css('background-image: url("../images/cornwallis_surrender.jpg"');
+                    
              
         });
 
