@@ -194,7 +194,7 @@ $(document).ready(function(){
         }
         currentRightAnswer = triviaQuestions[currentQuestionNum].correctAnswerNum;
         // console.log("current right answer is ",currentRightAnswer);
-         x = currentRightAnswer;
+         x = triviaQuestions[currentQuestionNum].answers[currentRightAnswer];
         console.log("this is x"+x);
         //console.log("text");
             var API_KEY = '7024641-dc104f7b2c2ba9ca9bdcc091e';
