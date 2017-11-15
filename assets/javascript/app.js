@@ -1,10 +1,13 @@
 
 $(document).ready(function(){
-    var numRight            =  0;
-    var numWrong            =  0;
-    var currentQuestionNum  =  0;
+    var numRight               =  0;
+    var numWrong               =  0;
+    var currentQuestionNum     =  0; // This is the index of the question in triviaQuestions that is currently active.
+    var numGameQuestions       = 10; // This is the number of questions that constitute a single game.
+    var totalQuestionsAnswered =  0; // This var contains the number of questions that user has currently answered.
     var currentChoice;
-    var currentRightAnswer;
+    var currentRightAnswer;       // this is the index (in triviaQuestions[].answers[]) of the right answer for a particular question.
+
 
     var triviaQuestions = []; /* here's the array of objects to store the questions and answers in*/
 
@@ -32,34 +35,27 @@ $(document).ready(function(){
     }
 
     function resetTimer() {
-        // console.log("in resetTimer intervalID is "+intervalID);
         clearInterval(intervalID);
-        // console.log("resetTimer");
     }
 
     function stopTimer() {
-       
-        // console.log("in stopTimer, intervalID is "+intervalID);
         resetTimer();
-        // console.log("Stopped Timer");
-        // console.log("processing state of play from stopTimer");
         processStateOfPlay(-1,currentRightAnswer);
-        // console.log("calling getQandA from stopTimer")
         getQandA();
-      
-      
-      
     }
 
-
-    /* Utility Functions */
-
+    /********************************************************************************/
+    /* Utility Functions                                                            */
+    /********************************************************************************/
 
         
 
     function getRandomInteger(lowerLimit,upperLimit){
                 return Math.floor(Math.random()*(upperLimit-lowerLimit+1)+lowerLimit);
     }
+
+    //The next function replaces the &quot;, &#39;, &, and acute accented characters that appear in the Open TDB questions and answers
+    //   with their equivalent, displayable character.
 
     function cleanUpString(inString){
             var cleanString;
@@ -72,10 +68,11 @@ $(document).ready(function(){
             return cleanString;
     }
 
-    /*-------------------------------------*/
-    /* Here are the functions that get the questions and answers from OPENTDB, the open trivia database */
-    /* process the json that is returned, and load up the triviaQuestions array of objects that we'll use */
-    /* to play the game. */
+    /*******************************************************************************************************/
+    /* Here are the functions that get the questions and answers from OPENTDB, the open trivia database    */
+    /* process the json that is returned, and load up the triviaQuestions array of objects that we'll use  */
+    /* to play the game.                                                                                   */
+    /*******************************************************************************************************/
 
     function getAnswers(incorrectAnswersArray,correctAnswer,correctPos) {
         var j;
@@ -140,23 +137,21 @@ $(document).ready(function(){
 
     function initGame() {
         
-        numRight            =  0;
-        numWrong            =  0;
-        currentQuestionNum  =  0;
+        // Set the score variables and the current game state counters to 0
+        numRight               =  0;
+        numWrong               =  0;
+        currentQuestionNum     =  0;
+        totalQuestionsAnswered = 0;
 
-        // console.log("I got here 2");
         // We'll get some questions via ajax from the Open Trivia DB API 
         $.ajax({
           url: "https://opentdb.com/api.php?amount=20&category=23",
           method: "GET"
         }).done(function(trivia) {
-            // console.log(trivia);
-            initQuestions(trivia); //and store the questions and answers in our triviaQuestions object.
-            // console.log(triviaQuestions);      
-          
+            initQuestions(trivia); //and store the questions and answers in our triviaQuestions object.    
         });
 
-        // Until user clicks the "begin" button, we'll hide the questions, answers, and timer displays
+        // We'll hide the questions, answers, and timer displays until the user clicks the "begin" button,
         $("#questionsSection").hide();
         $("#answersSection").hide();
       
@@ -169,13 +164,10 @@ $(document).ready(function(){
     /* new page.                                     */
     /*-----------------------------------------------*/
 
+    // Get the game's questions and answers, as well as the pictures to use for the background
     function getQandA() {
 
         currentQuestionNum++;
-        // console.log("in getQandA I have currentQuestionNum = ",currentQuestionNum);
-        // console.log("in getQandA I have triviaQuestions.length = "+triviaQuestions.length);
-        // alert("in getQandAtriviaQuestions.length is "+triviaQuestions.length);
-
 
         if (currentQuestionNum >= triviaQuestions.length) {
             // time to start over with the 0th question
@@ -193,31 +185,19 @@ $(document).ready(function(){
             $(answerID).text(triviaQuestions[currentQuestionNum].answers[i]);
         }
         currentRightAnswer = triviaQuestions[currentQuestionNum].correctAnswerNum;
-        // console.log("current right answer is ",currentRightAnswer         
+        
         x = triviaQuestions[currentQuestionNum].answers[currentRightAnswer];
-        console.log("this is x "+x);
 
-        //console.log("text");
-            var API_KEY = '7024641-dc104f7b2c2ba9ca9bdcc091e';
-            var URL = "https://pixabay.com/api/?key="+API_KEY+"&q="+encodeURIComponent(x)+"&image_type=photo"+"&safesearch=true";
+
+        //  Now, we find a new background photo, using the pixabay API
+        var API_KEY = '7024641-dc104f7b2c2ba9ca9bdcc091e';
+        var URL = "https://pixabay.com/api/?key="+API_KEY+"&q="+encodeURIComponent(x)+"&image_type=photo"+"&safesearch=true";
         $.getJSON(URL, function(data){
-          //  console.log(data.hits.length);
-
-          // console.log("this is the data", data);
             if (data.hits.length == 0 ){
-                console.log("testing local asset");
                 $(".bg").css('background-image: url("../images/cornwallis_surrender.jpg"');
              } else {
                 $(".bg").css('background-image', 'url('+data.hits[0].webformatURL+')');
              }
-                    
-            //(parseInt(data.totalHits) > 0)
-         //   $.each(data.hits, function(i, hit){ console.log(hit.pageURL); });
-
-        //else
-            //console.log('No hits');
-                    
-             
         });
 
         resetTimer();
@@ -225,18 +205,32 @@ $(document).ready(function(){
         
     }
 
+     // Determine whether user gave right or wrong answer, as well as figuring out whether the game is over.
+
     function processStateOfPlay(currentChoice,currentRightAnswer) {
+
 
         if (currentChoice == currentRightAnswer) {
             numRight++;
-            // console.log("Incremented numRight to ",numRight);
             $("#rightAnswers").text("#Right: "+numRight);
         } else {
             numWrong++;
-            // console.log("Incremented numWrong to ", numWrong);
             $("#wrongAnswers").text("#Wrong: "+numWrong);
         }
 
+        totalQuestionsAnswered++;
+        if (totalQuestionsAnswered == numGameQuestions) {
+            // Game Over!!
+            // Present Game over and user's score
+            // Ask user whether user wants to enter initials alongside score for leaderboard
+            // Retrieve leaderboard from DB
+            // If score high enough to make leaderboard {
+            //   Add score (and initials, if supplied) to leaderboard
+            //   Update leaderboard in DB
+            // }
+            // Display leaderboard in DB
+
+        }
 
     }
 
@@ -252,57 +246,40 @@ $(document).ready(function(){
                     switch ($(this).attr('id')){
                         
                         case "beginButton":
-                            
-                            // console.log("beginButton clicked");
                             currentQuestionNum = -1;
                             $("#questionsSection").show();
                             $("#answersSection").show();
                             getQandA();
-                            
                             break;
 
                         case "helpButton":
-                          
-                            // console.log("helpButton clicked");
-                            
                             break;
 
                         case "answer0":
-                        
-                            // alert("answer0 clicked");
                             currentChoice  = $(this).attr('value');
-                            // console.log("currentChoice is "+currentChoice+" and currentRightAnswer is "+currentRightAnswer);
+                           
                             processStateOfPlay(currentChoice,currentRightAnswer);
-                            
                             getQandA();
                             
                             break;
                         case "answer1":
-                            
-                            // console.log("answer1 clicked");
                             currentChoice  = $(this).attr('value');
-                            // console.log("currentChoice is "+currentChoice+" and currentRightAnswer is "+currentRightAnswer);
+
                             processStateOfPlay(currentChoice,currentRightAnswer);
-                           
                             getQandA();
                            
                             break;
                         case "answer2":
-                            
-                            // console.log("answer2 clicked");
                             currentChoice  = $(this).attr('value');
-                            // console.log("currentChoice is "+currentChoice+" and currentRightAnswer is "+currentRightAnswer);
+                  
                             processStateOfPlay(currentChoice,currentRightAnswer);
-                           
                             getQandA();
                             
                             break;
                         case "answer3":
-                            
-                            // console.log("answer3 clicked");
                             currentChoice  = $(this).attr('value');
-                            // console.log("currentChoice is "+currentChoice+" and currentRightAnswer is "+currentRightAnswer);
                             
+                            processStateOfPlay(currentChoice,currentRightAnswer);
                             getQandA();
                             
                             break;
