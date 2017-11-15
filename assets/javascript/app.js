@@ -134,7 +134,24 @@ $(document).ready(function(){
          }
          // alert("triviaQuestions.length is "+triviaQuestions.length);
          // console.log(triviaQuestions);     
+        // We'll get some pictures via REST API call from pixabay.com API 
+        
+       x = correctAnswer;
      
+        //console.log("text");
+            var API_KEY = '7024641-dc104f7b2c2ba9ca9bdcc091e';
+            var URL = "https://pixabay.com/api/?key="+API_KEY+"&q="+encodeURIComponent(x)+"&image_type=photo"+"&safesearch=true";
+        $.getJSON(URL, function(data){
+          //  console.log("this is the data", data);
+            $(".bg").css('background-image', 'url('+data.hits[0].webformatURL+')');
+        if (parseInt(data.totalHits) > 0)
+            $.each(data.hits, function(i, hit){ console.log(hit.pageURL); });
+
+        else
+            //console.log('No hits');
+            $(".bg").css('background-image: url("../images/cornwallis_surrender.jpg"');
+             
+        });
     }
 
     function initGame() {
