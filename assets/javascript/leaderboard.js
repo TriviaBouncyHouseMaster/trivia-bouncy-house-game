@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 var database; 
 var scores = [];
+var playerCount = 0;
 
 // Initialize Firebase
   var config = {
@@ -16,37 +17,42 @@ var scores = [];
 
 database = firebase.database();
     
-    $("#addScore").on("click", function(event) {
-      console.log("HEY, YOU CLICK ON ME")
-      event.preventDefault(); // Don't reset the page!
+  function outputOneRow(row) {
+    var scoreRow;
+    var initialsLB;
+    var scoreLB;
+    var playerNum;
+    var leaderboardList = [];
 
-      // Get the initials from form, and number of answers correct from game.
-      var initials = $("#initials").val().trim();
-      var numberCorrect = $("#number-correct").val().trim();
-      
-      // Hardcode test database
-      // var initials = "JMC";
-      // var numberCorrect = 20000;
+    console.log("You have accessed the score row.")
 
-      database.ref().push({
-        initials: initials,
-        numberCorrect: numberCorrect,
-        dateAdded: firebase.database.ServerValue.TIMESTAMP
-      })
-    });
+    // Build a new train schedule table row
+    playerNum = "playerNum"+playerCount; 
+  
+    initialsLB = "<td>"+row.trainName+"</td>";
+    scoreLB = "<td>"+row.trainDestination+"</td>";        
+   
+    var scoreRow = $("<tr>"+initialsLB+scoreLB+"</tr>");
+    scoreRow.attr("id",playerNum);
+    console.log(scoreRow);
+    
+    // And write it out!
+    $("#leaderboard").append(scoreRow);
+  }
 
-    database.ref().on('value', function(snapshot) {
-        console.log("I got here");
-        scores = [];
-        $("#trains").empty();
-        snapshot.forEach(function(childSnapshot) {
-          var childData = childSnapshot.val();
-          scores.push({
-            initials: initials,
-            numberCorrect: numberCorrect,
-            dateAdded: firebase.database.ServerValue.TIMESTAMP
-          });
-        });
-        scores.forEach(outputOneRow);
-    });    
+  database.ref().on('value', function(snapshot) {
+      console.log("I got here");
+      leaderboardList = [];
+      $("#leaderboard").empty();
+      snapshot.forEach(function(childSnapshot) {
+        var childData = childSnapshot.val();
+        leaderboardList.push(
+          {initials: childData.initials,
+           numberCorrect: childData.numberCorrect,
+          }
+        );
+      });
+
+      leaderboardList.forEach(outputOneRow);
+  });
 });

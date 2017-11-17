@@ -3,7 +3,7 @@
   <head>
     
     <!-- style css -->
-    <link rel="stylesheet" type="text/css" href="css/styleUI.css"> 
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/styleUI.css">  -->
     
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -16,11 +16,11 @@
 
     <!-- Google Fonts -->
 
-  <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
 
-  <link rel="stylesheet" href="./assets/css/reset.css"> 
+    <link rel="stylesheet" href="./assets/css/reset.css"> 
   <!-- style css -->
-    <link rel="stylesheet" type="text/css" href="./css/styleUI.css"> 
+  <!-- <link rel="stylesheet" type="text/css" href="assets/css/styleUI.css">  -->
 
   </head>
 
@@ -41,11 +41,23 @@
     </nav>
 
     <!-- answers-->
-        <div class="center red lighten-2" id="mainpanel2">
-          <!-- Row for Answers-->
-             
-        </div>
-    <!-- End of Answers -->
+    <div class="center red lighten-2" id="mainpanel2">
+      <!-- Row for Answers-->
+         <table class="bordered striped responsive-table">
+           <thead>
+             <tr>
+                 <th>Initials</th>
+                 <th>Score</th>
+             </tr>
+           </thead>
+
+           <tbody id="leaderboard">
+
+           </tbody>
+         </table>
+
+    </div>
+        <!-- End of Answers -->
 </div>    
 
 
@@ -60,11 +72,13 @@
   <!-- jQuery CDN -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   
-    <!-- Bootstrap JavaScript CDN -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
-    <!-- Trivia Questions Game JavaScript -->
-    <script src="./assets/javascript/app.js"></script>
+  <!-- Bootstrap JavaScript CDN -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- Firebase Stuff -->
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+
+  <script src="./assets/javascript/leaderboard.js"></script>
 
 </body>
 </html>
