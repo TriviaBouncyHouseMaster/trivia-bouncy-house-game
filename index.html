@@ -23,39 +23,40 @@
 
   </head>
 
-  <body>
+  <body class="grey darken-3">
 
         
 
- <div class="container center" id="maincontainer">
+ <div class="container center " id="maincontainer">
      
-    <div class="col-xs-4 col-sm-6 center">
+    <div class="col-xs-4 col-sm-6 center ">
      <!-- Nav Bar -->   
-    <nav class="" id="test">
+    <nav class="deep-purple darken-4" id="test">
       <div class="nav-wrapper">
-        <a class="text-align-center" id="title"> Trivia Bouncy House Game!</a>
+          <br>
+        <a class="text-align-center deep-purple darken-4 yellow-text" id="title"> Trivia Bouncy House Game!</a>
         <ul class="right hide-on-med-and-down">
-          <li><a class="btn red lighten-2 waves-effect waves-light" href="indexLB.html">Leaderboard</a></li>
+          <li><a class="btn deep-purple lighten-1 waves-effect waves-light yellow-text" href="indexLB.html">Leaderboard</a></li>
         </ul>
       </div>
     </nav>
 
-    <div class="row red lighten-2" id="questions">
+    <div class="row deep-purple darken-4" id="questions">
         <!-- question -->
-        <div id="myQuestion">Which infamous European traitor was known as 'the last person to enter Parliament with honest intentions'?</div>
+        <h5 class="yellow-text" id="myQuestion">Which infamous European traitor was known as 'the last person to enter Parliament with honest intentions'?</h5>
             <br>
         <!-- end question -->    
       <!-- Time/Right/Worng -->   
-        <div class="red lighten-2" id="qPanel">
+        <div class="deep-purple darken-4" id="qPanel">
           <div class="row">
                 <div class="col s4">
-                    <button class="z-depth-5 red lighten-4" id="myTimer">Time Remaining: </button>
+                    <button class="z-depth-5 deep-purple lighten-1 yellow-text" id="myTimer">Time Remaining: </button>
                 </div>
                 <div class="col s4">    
-                    <button class="z-depth-5 red lighten-4" id="rightAnswers">#Right: 00</button>
+                    <button class="z-depth-5 deep-purple lighten-1 yellow-text" id="rightAnswers">#Right: 00</button>
                 </div>
                 <div class="col s4">    
-                    <button class="z-depth-5 red lighten-4" id="wrongAnswers">#Wrong: 00</button>
+                    <button class="z-depth-5 deep-purple lighten-1 yellow-text" id="wrongAnswers">#Wrong: 00</button>
                 </div>
           </div>
         </div>
@@ -69,30 +70,30 @@
 <div id="bg" style="height:400px"></div>
 
     <!-- answers-->
-        <div class="panel panel-default myPanel panel-relative  red lighten-2" id="mainpanel">
+        <div class="panel panel-default myPanel panel-relative  deep-purple darken-4" id="mainpanel">
           <!-- Row for Answers-->
             <div class="col-xs-4 col-sm-6 center">
                             <!-- The 4 answer choices go in these 4 sub columns -->
-                <div class="row center">
-                    <div class="col s6 center"> 
+                <div class="row center" id="answerrowone">
+                    <div class="col s8 center"> 
                         <div class="row" id="buttontext">
-                            <button type="button" class=" btn btn-default btnLarge btn-primary btn-block answerChoice red lighten-4" id="answer0" value="0">Guy Fawkes</button>
+                            <button type="button" class="deep-purple lighten-1 btn btn-default btnLarge btn-primary btn-block answerChoice" id="answer0" value="0">Guy Fawkes</button>
                         </div>
                         <div class="row" id="buttontext">
-                            <button type="button" class=" btn btn-default btnLarge btn-primary btn-block answerChoice red lighten-4" id="answer1" value="1">Francis Tresham</button>
+                            <button type="button" class="deep-purple lighten-1 btn btn-default btnLarge btn-primary btn-block answerChoice" id="answer1" value="1">Francis Tresham</button>
                         </div>
                         <div class="row" id="buttontext">
-                            <button type="button" class=" btn btn-default btnLarge btn-primary btn-block answerChoice red lighten-4" id="answer2" value="2">Everard Digby</button>
+                            <button type="button" class="deep-purple lighten-1 btn btn-default btnLarge btn-primary btn-block answerChoice" id="answer2" value="2">Everard Digby</button>
                         </div>
                         <div class="row" id="buttontext">
-                            <button type="button" class=" btn btn-default btnLarge btn-primary btn-block answerChoice red lighten-4" id="answer3" value="3">Robert Catesby</button>
+                            <button type="button" class="deep-purple lighten-1 btn btn-default btnLarge btn-primary btn-block answerChoice" id="answer3" value="3">Robert Catesby</button>
                         </div>
                     </div>  
-                        <div class="col s6" id="buttonline2">
+                        <div class="col s4" id="buttonline2">
                             <div class="row" id="gameScoreCSS">
-                                <button type="button" class="btn btn-default btnLarge btn-primary btn-block answerChoice red lighten-4" id="gameScore">Game Score:</button>
+                                <button type="button" class="btn btn-default btnLarge btn-primary btn-block answerChoice deep-purple lighten-1" id="gameScore">Game Score:</button>
                              <br>
-                                 <button type="button" class="btn btn-default btnLarge btn-primary btn-block answerChoice red lighten-4 " id="resetGame">Reset Game</button>
+                                 <button type="button" class="btn btn-default btnLarge btn-primary btn-block answerChoice deep-purple lighten-1" id="resetGame">Reset Game</button>
                             </div>
                         </div>
                 </div>
