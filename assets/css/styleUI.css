@@ -34,9 +34,10 @@
     
 }
 #myQuestion{
-    font-size: 2em;
+    font-size: 1.5em;
     font-family: 'Press Start 2P', cursive;
-    
+    color: white;
+    font-weight: bold;
 }
 
 #qPanel{
@@ -110,7 +111,7 @@
       }
   
       #myQuestion {
-        font-size: 1em;
+        font-size: 1.5em;
         padding-left: 0px;
         padding-top: 15px;
         margin:auto;    
