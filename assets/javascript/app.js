@@ -175,13 +175,17 @@ $(document).ready(function(){
         
     }
 
-    function initGame() {
-        
+    function resetCounters() {
         // Set the score variables and the current game state counters to 0
         numRight               =  0;
         numWrong               =  0;
         currentQuestionNum     =  0;
         totalQuestionsAnswered =  0;
+    }
+
+    function initGame() {
+        
+        resetCounters();
 
         // We'll get some questions via ajax from the Open Trivia DB API 
         $.ajax({
@@ -288,7 +292,7 @@ $(document).ready(function(){
     /* here are the event handling functions.        */
     /*-----------------------------------------------*/
 
-    $(".btnLarge").click(function() {
+    $(".answerChoice").click(function() {
                     $(this).blur();
                     
                     resetTimer();
@@ -296,11 +300,13 @@ $(document).ready(function(){
                         
                         case "startGame":
                             currentQuestionNum = -1;
+                            resetCounters();
                             $("#questionsSection").show();
                             $("#answersSection").show();
                             $("#rightAnswers").text("#Right: 0");
                             $("#wrongAnswers").text("#Wrong: 0");
                             $("#gameScore").text("Game Score: 0");
+                            $("#bg").css('background-image', 'url(https://upload.wikimedia.org/wikipedia/commons/b/b8/Surrender_of_Lord_Cornwallis.jpg)');
                             getQandA();
                             break;
 
