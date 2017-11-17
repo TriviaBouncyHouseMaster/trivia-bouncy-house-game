@@ -298,6 +298,9 @@ $(document).ready(function(){
                             currentQuestionNum = -1;
                             $("#questionsSection").show();
                             $("#answersSection").show();
+                            $("#rightAnswers").text("#Right: 0");
+                            $("#wrongAnswers").text("#Wrong: 0");
+                            $("#gameScore").text("Game Score: 0");
                             getQandA();
                             break;
 
