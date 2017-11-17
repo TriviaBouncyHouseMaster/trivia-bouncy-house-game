@@ -181,7 +181,7 @@ $(document).ready(function(){
         numRight               =  0;
         numWrong               =  0;
         currentQuestionNum     =  0;
-        totalQuestionsAnswered = 0;
+        totalQuestionsAnswered =  0;
 
         // We'll get some questions via ajax from the Open Trivia DB API 
         $.ajax({
@@ -191,9 +191,11 @@ $(document).ready(function(){
             initQuestions(trivia); //and store the questions and answers in our triviaQuestions object.    
         });
 
-        // We'll hide the questions, answers, and timer displays until the user clicks the "begin" button,
-        $("#questionsSection").hide();
-        $("#answersSection").hide();
+        $("#rightAnswers").text("#Right: "+numRight);
+        $("#wrongAnswers").text("#Right: "+numWrong);
+
+
+        
       
     }
 
@@ -261,8 +263,14 @@ $(document).ready(function(){
 
         totalQuestionsAnswered++;
         if (totalQuestionsAnswered == numGameQuestions) {
+
             // Game Over!!
             // Present Game over and user's score
+            $("#gameScore").text("Game Score: "+numRight);
+            // Reset 
+            resetTimer();
+            $("#rightAnswers").text("#Right: 0");
+            $("#wrongAnswers").text("#Wrong: 0");
             // Ask user whether user wants to enter initials alongside score for leaderboard
             // Retrieve leaderboard from DB
             // If score high enough to make leaderboard {
@@ -327,10 +335,14 @@ $(document).ready(function(){
 
                         case "resetGame":
                             console.log("Found resetGame");
+                            initGame();
+                            resetTimer();
+                            startTimer();
                             break;
 
                         case "gameScore":
                             console.log("Found gameScore");
+
                             break;
 
                         default:
