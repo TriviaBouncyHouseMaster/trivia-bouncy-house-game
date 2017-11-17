@@ -16,7 +16,6 @@ var scores = [];
 
 database = firebase.database();
     
-    //
     $("#addScore").on("click", function(event) {
       console.log("HEY, YOU CLICK ON ME")
       event.preventDefault(); // Don't reset the page!
@@ -49,9 +48,5 @@ database = firebase.database();
           });
         });
         scores.forEach(outputOneRow);
-    });
-
-    
-
-    
+    });    
 });
