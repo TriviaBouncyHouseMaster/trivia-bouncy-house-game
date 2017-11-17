@@ -111,8 +111,16 @@
    
     }
     
-      #bg {
-        background-repeat: no-repeat;
-        background-image: center;
-        
+      #bg {/*JPUpdated style for background image*/
+    /* The image used */
+    /* Full height */
+    background-repeat: no-repeat;
+    background-image: center;
+    height: 100%; 
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+
       }

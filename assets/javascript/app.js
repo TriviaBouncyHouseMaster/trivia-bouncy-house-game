@@ -195,7 +195,7 @@ $(document).ready(function(){
         $.getJSON(URL, function(data){
             if (data.hits.length == 0 ){
                 $("#bg").css('background-image', 'url(https://upload.wikimedia.org/wikipedia/commons/b/b8/Surrender_of_Lord_Cornwallis.jpg)');
-               // $("#bg").css('background-image: url("../images/cornwallis_surrender.jpg"');
+               //JP Updated the cornwallis image to pull in the URL directly from the source.
              } else {
                 $("#bg").css('background-image', 'url('+data.hits[0].webformatURL+')');
              }
