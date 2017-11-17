@@ -193,9 +193,9 @@ $(document).ready(function(){
 
         $("#rightAnswers").text("#Right: "+numRight);
         $("#wrongAnswers").text("#Right: "+numWrong);
-
-
-        
+        $("#answersSection").hide();
+        $("#bg").css('background-image', 'url(https://upload.wikimedia.org/wikipedia/commons/b/b8/Surrender_of_Lord_Cornwallis.jpg)');
+        $("#myQuestion").text("Test Your Historical Knowledge With Our Game!!");
       
     }
 
@@ -217,7 +217,7 @@ $(document).ready(function(){
             currentQuestionNum = 0;
         }
 
-        
+        console.log("in getQandA currentQuestionNum is "+currentQuestionNum);
         $("#myQuestion").text(triviaQuestions[currentQuestionNum].question);
 
         for (var i = 0; i<triviaQuestions[currentQuestionNum].answers.length; i++) {
@@ -294,7 +294,7 @@ $(document).ready(function(){
                     resetTimer();
                     switch ($(this).attr('id')){
                         
-                        case "beginButton":
+                        case "startGame":
                             currentQuestionNum = -1;
                             $("#questionsSection").show();
                             $("#answersSection").show();
@@ -333,13 +333,7 @@ $(document).ready(function(){
                             
                             break;
 
-                        case "resetGame":
-                            console.log("Found resetGame");
-                            initGame();
-                            resetTimer();
-                            startTimer();
-                            break;
-
+                        
                         case "gameScore":
                             console.log("Found gameScore");
 
