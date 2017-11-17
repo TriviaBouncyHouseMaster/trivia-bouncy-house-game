@@ -69,7 +69,7 @@ $(document).ready(function(){
                 if (--timer < 0) {
                     stopTimer();
                 }
-                $("#myTimer").text("Time Remaining: "+timer);
+                $("#myTimer").text("Time Remaining: "+ timer);
             }, 1000);
         
     }
