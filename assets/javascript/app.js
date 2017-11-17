@@ -84,6 +84,7 @@ $(document).ready(function(){
         getQandA();
     }
 
+
     /********************************************************************************/
     /* Utility Functions                                                            */
     /********************************************************************************/
@@ -285,6 +286,9 @@ $(document).ready(function(){
               numberCorrect: score,
               dateAdded: firebase.database.ServerValue.TIMESTAMP
             })
+            resetCounters();
+            //pauseTimer();
+            
             // Retrieve leaderboard from DB
             // If score high enough to make leaderboard {
             //   Add score (and initials, if supplied) to leaderboard
