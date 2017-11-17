@@ -18,20 +18,22 @@ database = firebase.database();
     
     //
     $("#addScore").on("click", function(event) {
-
+      console.log("HEY, YOU CLICK ON ME")
       event.preventDefault(); // Don't reset the page!
 
-      // Get the username from form, and number of answers correct from game.
-      var username        = $("#username").val().trim();
+      // Get the initials from form, and number of answers correct from game.
+      var initials = $("#initials").val().trim();
       var numberCorrect = $("#number-correct").val().trim();
+      
+      // Hardcode test database
+      // var initials = "JMC";
+      // var numberCorrect = 20000;
 
-      // Push that train info!
-      // The dateAdded value gives us a way to retrieve the entries by the time/date they were entered.
       database.ref().push({
-        username:        username,
+        initials: initials,
         numberCorrect: numberCorrect,
         dateAdded: firebase.database.ServerValue.TIMESTAMP
-      }, function(error));
+      })
     });
 
     database.ref().on('value', function(snapshot) {
@@ -40,13 +42,11 @@ database = firebase.database();
         $("#trains").empty();
         snapshot.forEach(function(childSnapshot) {
           var childData = childSnapshot.val();
-          scores.push(
-                    {trainName: childData.trainName,
-                     trainDestination: childData.trainDestination,
-                     firstTrain: childData.firstTrain,
-                     trainFrequency: childData.trainFrequency
-                    }
-          );
+          scores.push({
+            initials: initials,
+            numberCorrect: numberCorrect,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+          });
         });
         scores.forEach(outputOneRow);
     });
