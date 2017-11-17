@@ -13,16 +13,18 @@
     float: center; 
 }
 
+.title{
+    font-family: 'Russo One', sans-serif;
+    font-size: 3em;
+    text-align: center;
+}
+
 #test{
     margin-top: 20px;
     width:100%;
 }
 
-#title{
-    font-family: 'Russo One', sans-serif;
-    font-size: 3em;
-    text-align: center;
-}
+
 
 #questions{
     margin-top: 20px;
