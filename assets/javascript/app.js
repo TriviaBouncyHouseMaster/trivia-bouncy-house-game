@@ -221,9 +221,9 @@ $(document).ready(function(){
         $("#myQuestion").text(triviaQuestions[currentQuestionNum].question);
 
         for (var i = 0; i<triviaQuestions[currentQuestionNum].answers.length; i++) {
-            // console.log("i is ",i);
+     
             var answerID = "#answer"+i;
-            // console.log("Current answer is ",triviaQuestions[currentQuestionNum].answers[i]);
+
             $(answerID).text(triviaQuestions[currentQuestionNum].answers[i]);
         }
         currentRightAnswer = triviaQuestions[currentQuestionNum].correctAnswerNum;
