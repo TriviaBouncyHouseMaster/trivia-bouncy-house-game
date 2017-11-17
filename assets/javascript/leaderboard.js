@@ -42,13 +42,11 @@ database = firebase.database();
         $("#trains").empty();
         snapshot.forEach(function(childSnapshot) {
           var childData = childSnapshot.val();
-          scores.push(
-                    {trainName: childData.trainName,
-                     trainDestination: childData.trainDestination,
-                     firstTrain: childData.firstTrain,
-                     trainFrequency: childData.trainFrequency
-                    }
-          );
+          scores.push({
+            initials: initials,
+            numberCorrect: numberCorrect,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+          });
         });
         scores.forEach(outputOneRow);
     });
