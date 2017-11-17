@@ -39,24 +39,24 @@ $(document).ready(function(){
 
     database = firebase.database();
 
-    $("#addScore").on("click", function(event) {
-      console.log("HEY, YOU CLICK ON ME")
-      event.preventDefault(); // Don't reset the page!
+    // $("#addScore").on("click", function(event) {
+    //   console.log("HEY, YOU CLICK ON ME")
+    //   event.preventDefault(); // Don't reset the page!
 
-      // Get the initials from form, and number of answers correct from game.
-      var initials = $("#initials").val().trim();
-      var numberCorrect = $("#number-correct").val().trim();
+    //   // Get the initials from form, and number of answers correct from game.
+    //   // var initials = $("#initials").val().trim();
+    //   // var numberCorrect = $("#number-correct").val().trim();
       
-      // Hardcode test database
-      // var initials = "JMC";
-      // var numberCorrect = 20000;
+    //   // Hardcode test database
+    //   // var initials = "JMC";
+    //   // var numberCorrect = 20000;
 
-      database.ref().push({
-        initials: initials,
-        numberCorrect: numberCorrect,
-        dateAdded: firebase.database.ServerValue.TIMESTAMP
-      })
-    });
+    //   database.ref().push({
+    //     initials: initials,
+    //     numberCorrect: numberCorrect,
+    //     dateAdded: firebase.database.ServerValue.TIMESTAMP
+    //   })
+    // });
     /*----------------------------------------------*/
 
     function startTimer() {
@@ -276,6 +276,15 @@ $(document).ready(function(){
             $("#rightAnswers").text("#Right: 0");
             $("#wrongAnswers").text("#Wrong: 0");
             // Ask user whether user wants to enter initials alongside score for leaderboard
+            var initials = prompt("Enter your initials:");
+            var score = numRight;
+            console.log("Your score should be " + score);
+            console.log(initials);
+            database.ref().push({
+              initials: initials,
+              numberCorrect: score,
+              dateAdded: firebase.database.ServerValue.TIMESTAMP
+            })
             // Retrieve leaderboard from DB
             // If score high enough to make leaderboard {
             //   Add score (and initials, if supplied) to leaderboard
