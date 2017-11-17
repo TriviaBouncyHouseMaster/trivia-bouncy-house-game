@@ -15,44 +15,20 @@ var playerCount = 0;
   };
   firebase.initializeApp(config);
 
-database = firebase.database();
-    
-  function outputOneRow(row) {
-    var scoreRow;
-    var initialsLB;
-    var scoreLB;
-    var playerNum;
-    var leaderboardList = [];
+  database = firebase.database();
 
-    console.log("You have accessed the score row.")
-
-    // Build a new train schedule table row
-    playerNum = "playerNum"+playerCount; 
-  
-    initialsLB = "<td>"+row.trainName+"</td>";
-    scoreLB = "<td>"+row.trainDestination+"</td>";        
-   
-    var scoreRow = $("<tr>"+initialsLB+scoreLB+"</tr>");
-    scoreRow.attr("id",playerNum);
-    console.log(scoreRow);
-    
-    // And write it out!
-    $("#leaderboard").append(scoreRow);
-  }
-
-  database.ref().on('value', function(snapshot) {
-      console.log("I got here");
+  database.ref().orderByChild("numberCorrect").on('child_added', function(childSnapshot) {
+      var childData;
       leaderboardList = [];
-      $("#leaderboard").empty();
-      snapshot.forEach(function(childSnapshot) {
-        var childData = childSnapshot.val();
-        leaderboardList.push(
-          {initials: childData.initials,
-           numberCorrect: childData.numberCorrect,
-          }
-        );
+      childData = childSnapshot.val();
+      leaderboardList.push({
+        initials: childData.initials,
+        numberCorrect: childData.numberCorrect,
       });
 
-      leaderboardList.forEach(outputOneRow);
+      var initialsLB = "<td>"+childData.initials+"</td>";
+      var scoreLB = "<td>"+childData.numberCorrect+"</td>";        
+      var scoreRow = $("<tr>"+initialsLB+scoreLB+"</tr>");
+      $("#leaderboard").prepend(scoreRow);
   });
 });
