@@ -194,7 +194,8 @@ $(document).ready(function(){
         var URL = "https://pixabay.com/api/?key="+API_KEY+"&q="+encodeURIComponent(x)+"&image_type=photo"+"&safesearch=true";
         $.getJSON(URL, function(data){
             if (data.hits.length == 0 ){
-                $("#bg").css('background-image: url("../images/cornwallis_surrender.jpg"');
+                $("#bg").css('background-image', 'url(https://upload.wikimedia.org/wikipedia/commons/b/b8/Surrender_of_Lord_Cornwallis.jpg)');
+               // $("#bg").css('background-image: url("../images/cornwallis_surrender.jpg"');
              } else {
                 $("#bg").css('background-image', 'url('+data.hits[0].webformatURL+')');
              }
