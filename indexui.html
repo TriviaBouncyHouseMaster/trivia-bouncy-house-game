@@ -14,11 +14,11 @@
 
     <!-- Google Fonts -->
 
-  <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Russo+One|VT323" rel="stylesheet">
 
   <link rel="stylesheet" href="./assets/css/reset.css"> 
   <!-- style css -->
-  <link rel="stylesheet" type="text/css" href="./assets/css/styleUI.css"> 
+  <link rel="stylesheet" type="text/css" href="assets/styleUI.css"> 
     
 
   </head>
@@ -29,8 +29,7 @@
 
  <div class="container center" id="maincontainer">
      
-    <div class="col-xs-4 col-sm-6 center">
-     <!-- Nav Bar -->   
+        <!-- Nav Bar -->   
     <nav class="" id="test">
       <div class="nav-wrapper">
         <a class="text-align-center" id="title"> Trivia Bouncy House Game!</a>
@@ -61,37 +60,36 @@
         </div>
       <!-- Time/Right/Worng -->
     </div>
-</div>
     
     
 
 
-<div id="bg" style="height:400px"></div>
+<div style="height:400px"></div>
 
     <!-- answers-->
         <div class="panel panel-default myPanel panel-relative  red lighten-2" id="mainpanel">
           <!-- Row for Answers-->
             <div class="col-xs-4 col-sm-6 center">
-                            <!-- The 4 answer choices go in these 4 sub columns -->
+                            <!-- The 4 answer choices go in these 4 sub rows -->
                 <div class="row center">
-                    <div class="col s6 center"> 
-                        <div class="row" id="buttontext">
-                            <button type="button" class=" btn btn-default btnLarge btn-primary btn-block answerChoice red lighten-4" id="answer0" value="0">Guy Fawkes</button>
-                        </div>
-                        <div class="row" id="buttontext">
-                            <button type="button" class=" btn btn-default btnLarge btn-primary btn-block answerChoice red lighten-4" id="answer1" value="1">Francis Tresham</button>
-                        </div>
-                        <div class="row" id="buttontext">
-                            <button type="button" class=" btn btn-default btnLarge btn-primary btn-block answerChoice red lighten-4" id="answer2" value="2">Everard Digby</button>
-                        </div>
-                        <div class="row" id="buttontext">
-                            <button type="button" class=" btn btn-default btnLarge btn-primary btn-block answerChoice red lighten-4" id="answer3" value="3">Robert Catesby</button>
-                        </div>
-                    </div>  
-                        <div class="col s6" id="buttonline2">
-                            <div class="row" id="gameScoreCSS">
+                    <div class="col s3" id="buttontext">
+                        <button type="button" class="btn btn-default btnLarge btn-primary btn-block answerChoice red lighten-4" id="answer0" value="0">Guy Fawkes</button>
+                    </div>
+                    <div class="col s3" id="buttontext">
+                        <button type="button" class="btn btn-default btnLarge btn-primary btn-block answerChoice red lighten-4" id="answer1" value="1">Francis Tresham</button>
+                    </div>
+                    <div class="col s3" id="buttontext">
+                        <button type="button" class="btn btn-default btnLarge btn-primary btn-block answerChoice red lighten-4" id="answer2" value="2">Everard Digby</button>
+                    </div>
+                    <div class="col s3"id="buttontext">
+                        <button type="button" class="btn btn-default btnLarge btn-primary btn-block answerChoice red lighten-4" id="answer3" value="3">Robert Catesby</button>
+                    </div>
+                    <br>
+                        <div class="row" id="buttonline2">
+                            <div class="col s4" id="gameScoreCSS">
                                 <button type="button" class="btn btn-default btnLarge btn-primary btn-block answerChoice red lighten-4" id="gameScore">Game Score:</button>
-                             <br>
+                             </div>
+                             <div class="col s4" id="resetGameCSS">
                                  <button type="button" class="btn btn-default btnLarge btn-primary btn-block answerChoice red lighten-4 " id="resetGame">Reset Game</button>
                             </div>
                         </div>
@@ -112,14 +110,11 @@
   <!-- jQuery CDN -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   
-  <!-- Bootstrap JavaScript CDN -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JavaScript CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
-  <!-- Firebase Stuff -->
-  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-
-  <!-- Trivia Questions Game JavaScript -->
-  <script src="./assets/javascript/app.js"></script>
+    <!-- Trivia Questions Game JavaScript -->
+    <script src="./assets/javascript/app.js"></script>
 
 </body>
 </html>
