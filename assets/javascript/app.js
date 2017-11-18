@@ -11,6 +11,8 @@ $(document).ready(function(){
 
     var triviaQuestions = []; /* here's the array of objects to store the questions and answers in*/
 
+
+        
     /*----------------------------------------------*/
     // Timer Functionality
     /*----------------------------------------------*/
@@ -41,7 +43,7 @@ $(document).ready(function(){
 
 
     $("#addScore").on("click", function(event) {
-      // console.log("HEY, YOU CLICK ON ME")
+   
       event.preventDefault(); // Don't reset the page!
 
 
@@ -199,11 +201,13 @@ $(document).ready(function(){
 
         $("#rightAnswers").text("#Right: "+numRight);
         $("#wrongAnswers").text("#Right: "+numWrong);
-        $("#answersSection").hide();
+        $("#answerrowone").hide();
+        $("#questions").hide();
         $("#dropdown1").hide();
         $("#bg").css('background-image', 'url(https://upload.wikimedia.org/wikipedia/commons/b/b8/Surrender_of_Lord_Cornwallis.jpg)');
         $("#myQuestion").text("Test Your Historical Knowledge With Our Game!!");
-      
+        //initialize all modals           
+        //$('.modal').modal();
     }
 
     /*-----------------------------------------------*/
@@ -255,31 +259,15 @@ $(document).ready(function(){
         
     }
 
-     // Determine whether user gave right or wrong answer, as well as figuring out whether the game is over.
-
-    function processStateOfPlay(currentChoice,currentRightAnswer) {
-
-
-        if (currentChoice == currentRightAnswer) {
-            numRight++;
-            $("#rightAnswers").text("#Right: "+numRight);
-        } else {
-            numWrong++;
-            $("#wrongAnswers").text("#Wrong: "+numWrong);
-        }
-
-        totalQuestionsAnswered++;
-        if (totalQuestionsAnswered == numGameQuestions) {
-
-            // Game Over!!
-            // Present Game over and user's score
+    function gameOver() {
+        // Present Game over and user's score
             $("#gameScore").text("Game Score: "+numRight);
             // Reset 
             resetTimer();
             $("#rightAnswers").text("#Right: 0");
             $("#wrongAnswers").text("#Wrong: 0");
             // Ask user whether user wants to enter initials alongside score for leaderboard
-            var initials = prompt("Enter your initials:");
+            var initials = prompt("Game Over. Enter your name or initials to save your score:");
             var score = numRight;
             console.log("Your score should be " + score);
             console.log(initials);
@@ -288,16 +276,26 @@ $(document).ready(function(){
               numberCorrect: score,
               dateAdded: firebase.database.ServerValue.TIMESTAMP
             })
-            resetCounters();
-            //pauseTimer();
-            
-            // Retrieve leaderboard from DB
-            // If score high enough to make leaderboard {
-            //   Add score (and initials, if supplied) to leaderboard
-            //   Update leaderboard in DB
-            // }
-            // Display leaderboard in DB
+    }
 
+     // Determine whether user gave right or wrong answer, as well as figuring out whether the game is over.
+
+    function processStateOfPlay(currentChoice,currentRightAnswer) {
+
+
+        if (currentChoice == currentRightAnswer) {
+            numRight++;
+            $("#rightAnswers").text("#Right: "+numRight);
+            $("#gameScore").text("Game Score: "+numRight);
+        } else {
+            numWrong++;
+            $("#wrongAnswers").text("#Wrong: "+numWrong);
+        }
+
+        totalQuestionsAnswered++;
+        if (totalQuestionsAnswered == numGameQuestions) {
+            gameOver();
+            resetCounters();
         }
 
     }
@@ -316,8 +314,8 @@ $(document).ready(function(){
                         case "startGame":
                             currentQuestionNum = -1;
                             resetCounters();
-                            $("#questionsSection").show();
-                            $("#answersSection").show();
+                            $("#questions").show();
+                            $("#answerrowone").show();
                             $("#rightAnswers").text("#Right: 0");
                             $("#wrongAnswers").text("#Wrong: 0");
                             $("#gameScore").text("Game Score: 0");
@@ -327,7 +325,7 @@ $(document).ready(function(){
 
                         case "saveGame":
                             console.log("Saving Game");
-                            // $("#dropdown1").show();
+                            gameOver();
                             break;
 
                         case "helpButton":
@@ -370,7 +368,6 @@ $(document).ready(function(){
 
                         default:
                             
-                            alert("Unknown button!!");
                             getQandA();
                            
                             break;
