@@ -387,7 +387,4 @@ $(document).ready(function(){
 
     initGame();
 
-    if ((numWrong+numRight === 10)) {
-        // do form stuff where you enter the username and numRight score
-    }
 });

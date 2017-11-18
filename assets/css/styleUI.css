@@ -45,7 +45,7 @@
 }
 #myQuestion{
     font-size: 2em;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Agency FB', cursive;
     
 }
 
@@ -75,7 +75,7 @@
 #buttonline2{
     margin-top: 30px;
     text-align: center;
-    font-family: 'VT323', monospace;
+    font-family: 'Agency FB', monospace;
 
 }
 
@@ -97,33 +97,33 @@
       }
   
       .myPanel {
-          background-color: #f6f5dd;
-          margin-bottom: 2px;
-          font-size: 2em;
-          height: 100px;
-          padding: 5px;
-          padding-left: 18px;
-          padding-top: 15px;
-          line-height: 30px;
-          /*text-align: center;*/
+        background-color: #f6f5dd;
+        margin-bottom: 2px;
+        font-size: 2em;
+        height: 100px;
+        padding: 5px;
+        padding-left: 18px;
+        padding-top: 15px;
+        line-height: 30px;
+        /*text-align: center;*/
       }
   
       #qPanel {
-          /* background-color: ;
-          margin-bottom: 5px; */
-          margin-top: 10px;
-          margin-left: 30px;
-          margin-right: 30px;
-          font-size: 1em;
-          height: 75px;
-          padding: 5px;
-          padding-left: 18px;
-          padding-top: 15px;
+        /* background-color: ;
+        margin-bottom: 5px; */
+        margin-top: 10px;
+        margin-left: 30px;
+        margin-right: 30px;
+        font-size: 1em;
+        height: 75px;
+        padding: 5px;
+        padding-left: 18px;
+        padding-top: 15px;
          
       }
   
       #myQuestion {
-        font-size: 1em;
+        font-size: 2em;
         padding-left: 0px;
         padding-top: 15px;
         margin:auto;    
@@ -133,7 +133,7 @@
    
     }
     
-      #bg {/*JPUpdated style for background image*/
+    #bg {/*JPUpdated style for background image*/
     /* The image used */
     /* Full height */
     background-repeat: no-repeat;
