@@ -88,13 +88,36 @@
                             <button type="button" class=" btn btn-default btnLarge btn-primary btn-block answerChoice red darken-1 z-depth-5" id="answer3" value="3">Robert Catesby</button>
                         </div>
                     </div>  
-                        <div class="col s6" id="buttonline2">
-                            <div class="row" id="gameScoreCSS">
+                    <div class="col s6" id="buttonline2">
+                          <div class="row" id="gameScoreCSS">
                                 <button type="button" class="btn btn-block btnLarge answerChoice red darken-1" id="gameScore">Game Score:</button>
-                             <br>
-                                 <button type="button" class="btn btn-block btnLarge  answerChoice red darken-1 z-depth-5" id="startGame">Start Game</button>
-                            </div>
-                        </div>
+                              <br>
+                                 <button type="button" class="btn btn-block btnLarge  answerChoice red darken-1 z-depth-5 myInputBtn" id="startGame">Start/Reset Game</button>
+                              <br>
+                                
+                                <button class='btn btn-block btnLarge red darken-1 z-depth-5 myInputBtn answerChoice' id="saveGame">Save Game</button>
+                                 <!-- Initials -->
+                                 <div class="card-action myCard" id="dropdown1">
+                                    <form id="initialsForm">
+                                      <div class="row">
+                                        <h6>Enter Your Initials:</h6>
+                                        <div class="input-field">
+                                          <input id="initials" type="text">
+                                          <label for="initials"> AJP</label>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <button id="addInitials" class="btn waves-effect waves-light" type="submit" 
+                                          name="action" value="submit">Add Initials
+                                          <i class="material-icons right">send</i>
+                                        </button>
+                                      </div>
+                                    </form>
+                                </div>
+                            
+
+                          </div>
+                    </div>
                 </div>
             </div> 
         </div>

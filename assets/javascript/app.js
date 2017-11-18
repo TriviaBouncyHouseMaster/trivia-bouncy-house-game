@@ -40,16 +40,13 @@ $(document).ready(function(){
     database = firebase.database();
 
     $("#addScore").on("click", function(event) {
-      console.log("HEY, YOU CLICK ON ME")
+      // console.log("HEY, YOU CLICK ON ME")
       event.preventDefault(); // Don't reset the page!
 
       // Get the initials from form, and number of answers correct from game.
       var initials = $("#initials").val().trim();
       var numberCorrect = $("#number-correct").val().trim();
       
-      // Hardcode test database
-      // var initials = "JMC";
-      // var numberCorrect = 20000;
 
       database.ref().push({
         initials: initials,
@@ -198,6 +195,7 @@ $(document).ready(function(){
         $("#rightAnswers").text("#Right: "+numRight);
         $("#wrongAnswers").text("#Right: "+numWrong);
         $("#answersSection").hide();
+        $("#dropdown1").hide();
         $("#bg").css('background-image', 'url(https://upload.wikimedia.org/wikipedia/commons/b/b8/Surrender_of_Lord_Cornwallis.jpg)');
         $("#myQuestion").text("Test Your Historical Knowledge With Our Game!!");
       
@@ -308,6 +306,11 @@ $(document).ready(function(){
                             $("#gameScore").text("Game Score: 0");
                             $("#bg").css('background-image', 'url(https://upload.wikimedia.org/wikipedia/commons/b/b8/Surrender_of_Lord_Cornwallis.jpg)');
                             getQandA();
+                            break;
+
+                        case "saveGame":
+                            console.log("Saving Game");
+                            $("#dropdown1").show();
                             break;
 
                         case "helpButton":

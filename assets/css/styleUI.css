@@ -19,6 +19,15 @@
     text-align: center;
 }
 
+.myInputBtn {
+  max-width: 250px;
+}
+
+.myCard {
+  max-width: 250px;
+  max-height: 250px;
+}
+
 #test{
     margin-top: 20px;
     width:100%;
