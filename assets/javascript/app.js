@@ -310,7 +310,7 @@ $(document).ready(function(){
 
                         case "saveGame":
                             console.log("Saving Game");
-                            $("#dropdown1").show();
+                            // $("#dropdown1").show();
                             break;
 
                         case "helpButton":
