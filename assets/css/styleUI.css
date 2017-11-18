@@ -1,6 +1,4 @@
-.text-roboto{
-    color:red;
-}
+
 .container {
 	width: 100%;
 	max-width: 960px;
@@ -13,11 +11,6 @@
     float: center; 
 }
 
-.title{
-    font-family: 'Russo One', sans-serif;
-    font-size: 3em;
-    text-align: center;
-}
 
 .myInputBtn {
   max-width: 250px;
@@ -30,10 +23,18 @@
 
 #test{
     margin-top: 20px;
+    margin-bottom: 10px;
     width:100%;
+    height: 80px;
 }
 
-
+#title{
+    font-family: 'Russo One', sans-serif;
+    font-size: 3em;
+    text-align: center;
+    text-shadow: 4px 4px 4px #aaa;
+   
+}
 
 #questions{
     margin-top: 20px;
@@ -43,10 +44,9 @@
     
 }
 #myQuestion{
-    font-size: 1.5em;
+    font-size: 2em;
     font-family: 'Press Start 2P', cursive;
-    color: white;
-    font-weight: bold;
+    
 }
 
 #qPanel{
@@ -63,6 +63,9 @@
     margin-bottom: 40px;
     height: 250px;
     /* opacity: 0.5; */
+}
+#answerrowone{
+    margin-left: 10px;
 }
 
 #mainpanel2{
@@ -120,7 +123,7 @@
       }
   
       #myQuestion {
-        font-size: 1.5em;
+        font-size: 1em;
         padding-left: 0px;
         padding-top: 15px;
         margin:auto;    
