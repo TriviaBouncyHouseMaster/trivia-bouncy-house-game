@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 var database; 
 var scores = [];
+var playerCount = 0;
 
 // Initialize Firebase
   var config = {
@@ -14,39 +15,20 @@ var scores = [];
   };
   firebase.initializeApp(config);
 
-database = firebase.database();
-    
-    $("#addScore").on("click", function(event) {
-      console.log("HEY, YOU CLICK ON ME")
-      event.preventDefault(); // Don't reset the page!
+  database = firebase.database();
 
-      // Get the initials from form, and number of answers correct from game.
-      var initials = $("#initials").val().trim();
-      var numberCorrect = $("#number-correct").val().trim();
-      
-      // Hardcode test database
-      // var initials = "JMC";
-      // var numberCorrect = 20000;
+  database.ref().orderByChild("numberCorrect").on('child_added', function(childSnapshot) {
+      var childData;
+      leaderboardList = [];
+      childData = childSnapshot.val();
+      leaderboardList.push({
+        initials: childData.initials,
+        numberCorrect: childData.numberCorrect,
+      });
 
-      database.ref().push({
-        initials: initials,
-        numberCorrect: numberCorrect,
-        dateAdded: firebase.database.ServerValue.TIMESTAMP
-      })
-    });
-
-    database.ref().on('value', function(snapshot) {
-        console.log("I got here");
-        scores = [];
-        $("#trains").empty();
-        snapshot.forEach(function(childSnapshot) {
-          var childData = childSnapshot.val();
-          scores.push({
-            initials: initials,
-            numberCorrect: numberCorrect,
-            dateAdded: firebase.database.ServerValue.TIMESTAMP
-          });
-        });
-        scores.forEach(outputOneRow);
-    });    
+      var initialsLB = "<td>"+childData.initials+"</td>";
+      var scoreLB = "<td>"+childData.numberCorrect+"</td>";        
+      var scoreRow = $("<tr>"+initialsLB+scoreLB+"</tr>");
+      $("#leaderboard").prepend(scoreRow);
+  });
 });

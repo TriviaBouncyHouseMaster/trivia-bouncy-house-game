@@ -39,24 +39,24 @@ $(document).ready(function(){
 
     database = firebase.database();
 
-    $("#addScore").on("click", function(event) {
-      console.log("HEY, YOU CLICK ON ME")
-      event.preventDefault(); // Don't reset the page!
+    // $("#addScore").on("click", function(event) {
+    //   console.log("HEY, YOU CLICK ON ME")
+    //   event.preventDefault(); // Don't reset the page!
 
-      // Get the initials from form, and number of answers correct from game.
-      var initials = $("#initials").val().trim();
-      var numberCorrect = $("#number-correct").val().trim();
+    //   // Get the initials from form, and number of answers correct from game.
+    //   // var initials = $("#initials").val().trim();
+    //   // var numberCorrect = $("#number-correct").val().trim();
       
-      // Hardcode test database
-      // var initials = "JMC";
-      // var numberCorrect = 20000;
+    //   // Hardcode test database
+    //   // var initials = "JMC";
+    //   // var numberCorrect = 20000;
 
-      database.ref().push({
-        initials: initials,
-        numberCorrect: numberCorrect,
-        dateAdded: firebase.database.ServerValue.TIMESTAMP
-      })
-    });
+    //   database.ref().push({
+    //     initials: initials,
+    //     numberCorrect: numberCorrect,
+    //     dateAdded: firebase.database.ServerValue.TIMESTAMP
+    //   })
+    // });
     /*----------------------------------------------*/
 
     function startTimer() {
@@ -69,7 +69,7 @@ $(document).ready(function(){
                 if (--timer < 0) {
                     stopTimer();
                 }
-                $("#myTimer").text("Time Remaining: "+timer);
+                $("#myTimer").text("Time Remaining: "+ timer);
             }, 1000);
         
     }
@@ -83,6 +83,7 @@ $(document).ready(function(){
         processStateOfPlay(-1,currentRightAnswer);
         getQandA();
     }
+
 
     /********************************************************************************/
     /* Utility Functions                                                            */
@@ -175,13 +176,17 @@ $(document).ready(function(){
         
     }
 
-    function initGame() {
-        
+    function resetCounters() {
         // Set the score variables and the current game state counters to 0
         numRight               =  0;
         numWrong               =  0;
         currentQuestionNum     =  0;
-        totalQuestionsAnswered = 0;
+        totalQuestionsAnswered =  0;
+    }
+
+    function initGame() {
+        
+        resetCounters();
 
         // We'll get some questions via ajax from the Open Trivia DB API 
         $.ajax({
@@ -191,9 +196,11 @@ $(document).ready(function(){
             initQuestions(trivia); //and store the questions and answers in our triviaQuestions object.    
         });
 
-        // We'll hide the questions, answers, and timer displays until the user clicks the "begin" button,
-        $("#questionsSection").hide();
+        $("#rightAnswers").text("#Right: "+numRight);
+        $("#wrongAnswers").text("#Right: "+numWrong);
         $("#answersSection").hide();
+        $("#bg").css('background-image', 'url(https://upload.wikimedia.org/wikipedia/commons/b/b8/Surrender_of_Lord_Cornwallis.jpg)');
+        $("#myQuestion").text("Test Your Historical Knowledge With Our Game!!");
       
     }
 
@@ -215,13 +222,13 @@ $(document).ready(function(){
             currentQuestionNum = 0;
         }
 
-        
+        console.log("in getQandA currentQuestionNum is "+currentQuestionNum);
         $("#myQuestion").text(triviaQuestions[currentQuestionNum].question);
 
         for (var i = 0; i<triviaQuestions[currentQuestionNum].answers.length; i++) {
-            // console.log("i is ",i);
+     
             var answerID = "#answer"+i;
-            // console.log("Current answer is ",triviaQuestions[currentQuestionNum].answers[i]);
+
             $(answerID).text(triviaQuestions[currentQuestionNum].answers[i]);
         }
         currentRightAnswer = triviaQuestions[currentQuestionNum].correctAnswerNum;
@@ -261,9 +268,27 @@ $(document).ready(function(){
 
         totalQuestionsAnswered++;
         if (totalQuestionsAnswered == numGameQuestions) {
+
             // Game Over!!
             // Present Game over and user's score
+            $("#gameScore").text("Game Score: "+numRight);
+            // Reset 
+            resetTimer();
+            $("#rightAnswers").text("#Right: 0");
+            $("#wrongAnswers").text("#Wrong: 0");
             // Ask user whether user wants to enter initials alongside score for leaderboard
+            var initials = prompt("Enter your initials:");
+            var score = numRight;
+            console.log("Your score should be " + score);
+            console.log(initials);
+            database.ref().push({
+              initials: initials,
+              numberCorrect: score,
+              dateAdded: firebase.database.ServerValue.TIMESTAMP
+            })
+            resetCounters();
+            //pauseTimer();
+            
             // Retrieve leaderboard from DB
             // If score high enough to make leaderboard {
             //   Add score (and initials, if supplied) to leaderboard
@@ -280,16 +305,21 @@ $(document).ready(function(){
     /* here are the event handling functions.        */
     /*-----------------------------------------------*/
 
-    $(".btnLarge").click(function() {
+    $(".answerChoice").click(function() {
                     $(this).blur();
                     
                     resetTimer();
                     switch ($(this).attr('id')){
                         
-                        case "beginButton":
+                        case "startGame":
                             currentQuestionNum = -1;
+                            resetCounters();
                             $("#questionsSection").show();
                             $("#answersSection").show();
+                            $("#rightAnswers").text("#Right: 0");
+                            $("#wrongAnswers").text("#Wrong: 0");
+                            $("#gameScore").text("Game Score: 0");
+                            $("#bg").css('background-image', 'url(https://upload.wikimedia.org/wikipedia/commons/b/b8/Surrender_of_Lord_Cornwallis.jpg)');
                             getQandA();
                             break;
 
@@ -325,12 +355,10 @@ $(document).ready(function(){
                             
                             break;
 
-                        case "resetGame":
-                            console.log("Found resetGame");
-                            break;
-
+                        
                         case "gameScore":
                             console.log("Found gameScore");
+
                             break;
 
                         default:
