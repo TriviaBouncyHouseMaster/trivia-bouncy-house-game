@@ -1,3 +1,6 @@
+# Trivia Game
+Answer tough historical questions and compare your scores with others on the leaderboard!
+
 ### Developers
 * [jpatterson24](https://github.com/jpatterson24) -
 **Jamal Patterson**
