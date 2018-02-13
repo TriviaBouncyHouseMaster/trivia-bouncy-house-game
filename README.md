@@ -12,7 +12,7 @@ Materialize is the css framework used to style this website. For further informa
 
 
 
-### Developers
+## Developers
 * [jpatterson24](https://github.com/jpatterson24) -
 **Jamal Patterson**
 * [shulme801](https://github.com/shulme801) -
